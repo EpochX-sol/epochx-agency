@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { ScrollAnimation } from '../utils/ScrollAnimation';
 
 const Testimonials = () => {
   const testimonials = [
@@ -22,16 +24,37 @@ const Testimonials = () => {
     }
   ];
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
     <section id="testimonials" className="py-24 px-6">
-      <h2 className="text-center font-fraunces text-lg tracking-[0.3em] uppercase text-gray-400 mb-16">
-        Client testimonials
-      </h2>
+      <ScrollAnimation>
+        <h2 className="text-center font-fraunces text-lg tracking-[0.3em] uppercase text-gray-400 mb-16">
+          Client testimonials
+        </h2>
+      </ScrollAnimation>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-14 max-w-6xl mx-auto">
+      <motion.div 
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-14 max-w-6xl mx-auto"
+      >
         {testimonials.map((testimonial, index) => (
-          <div 
-            key={index} 
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
             className="flex flex-col items-center px-4"
           >
             <img 
@@ -50,9 +73,9 @@ const Testimonials = () => {
                 {testimonial.role}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -60,7 +60,9 @@ const Header = () => {
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300
-      ${isScrolled ? 'bg-blue-500/90 backdrop-blur-sm shadow-lg' : 'bg-gradient-to-b from-black/50 to-transparent'}`}>
+      ${isScrolled 
+        ? 'bg-blue-400/50 backdrop-blur-sm shadow-sm' 
+        : 'bg-gradient-to-b from-blue-400/50 via-blue-400/30 to-transparent'}`}>
       <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
         <a href="/" className="text-white font-fraunces text-2xl font-black">
           EpochX
@@ -96,8 +98,7 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="absolute top-16 left-6 right-6 bg-white py-6 md:hidden shadow-xl rounded-lg">
-          <div className="relative">
-            {/* Triangle */}
+          <div className="relative"> 
             <div className="absolute -top-4 right-0 w-0 h-0 
                           border-l-[16px] border-l-transparent
                           border-b-[16px] border-b-white
